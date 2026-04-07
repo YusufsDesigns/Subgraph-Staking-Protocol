@@ -28,6 +28,12 @@ snapshot:; forge snapshot
 format  :; forge fmt
 anvil   :; anvil -m 'test test test test test test test test test test test junk' --steps-tracing --block-time 1
 
+abi-export:
+	forge inspect StakingRewards abi --json > ../graph/abis/StakingRewards.json
+
+build: abi-export
+	forge build
+
 deploy:
 	@forge script script/DeployStakingRewards.s.sol:DeployStakingRewards --rpc-url http://localhost:8545 --private-key $(DEFAULT_ANVIL_KEY) --broadcast
 

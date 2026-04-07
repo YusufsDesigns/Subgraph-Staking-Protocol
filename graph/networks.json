@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "StakingRewards": {
+      "address": "0xd2102D8e2607908b369bB72B2BbDA6d421fFbF01",
+      "startBlock": 10608903
+    }
+  }
+}

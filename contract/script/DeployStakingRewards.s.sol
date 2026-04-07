@@ -4,6 +4,7 @@ pragma solidity ^0.8.24;
 import {Script, console} from "forge-std/Script.sol";
 import {HelperConfig} from "script/HelperConfig.s.sol";
 import {StakingRewards} from "src/StakingRewards.sol";
+import {TokenA} from "src/TokenA.sol";
 import {TokenB} from "src/TokenB.sol";
 
 contract DeployStakingRewards is Script {
@@ -19,14 +20,14 @@ contract DeployStakingRewards is Script {
 
         stakingRewards = new StakingRewards(deployerAddress, stakingToken, rewardsToken, rewardsDuration);
 
-        // Mint reward tokens to deployer
-        TokenB(rewardsToken).mint(deployerAddress, INITIAL_REWARD_AMOUNT);
-
-        // Transfer reward tokens to staking contract
-        TokenB(rewardsToken).transfer(address(stakingRewards), INITIAL_REWARD_AMOUNT);
+        TokenB(rewardsToken).mint(address(stakingRewards), INITIAL_REWARD_AMOUNT);
 
         // Now notify reward amount
         stakingRewards.notifyRewardAmount(INITIAL_REWARD_AMOUNT);
+
+        // Fund test wallets with TokenA
+        TokenA(stakingToken).mint(0x08e29966eD9D2FC9c861DB5F37869Fe9766555b3, 1_000e18);
+        TokenA(stakingToken).mint(0x043F00335Cb668aF83e934a72a4009957afcEd33, 1_000e18);
 
         vm.stopBroadcast();
     }
