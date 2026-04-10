@@ -1,41 +1,10 @@
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RewardAdded @entity(immutable: true) {
-  id: Bytes!
-  reward: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RewardClaimed @entity(immutable: true) {
-  id: Bytes!
-  user: Bytes! # address
-  reward: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RewardsDurationUpdated @entity(immutable: true) {
-  id: Bytes!
-  newDuration: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
+# ── Immutable Event Log Entities ─────────────────────────────────────────────
+# One new record created per event. Never updated. Historical log only.
 
 type Staked @entity(immutable: true) {
   id: Bytes!
-  user: Bytes! # address
-  amount: BigInt! # uint256
+  user: Bytes!
+  amount: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -43,9 +12,59 @@ type Staked @entity(immutable: true) {
 
 type Withdrawn @entity(immutable: true) {
   id: Bytes!
-  user: Bytes! # address
-  amount: BigInt! # uint256
+  user: Bytes!
+  amount: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type RewardClaimed @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes!
+  reward: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RewardAdded @entity(immutable: true) {
+  id: Bytes!
+  reward: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RewardsDurationUpdated @entity(immutable: true) {
+  id: Bytes!
+  newDuration: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes!
+  newOwner: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ── Mutable State Entities ────────────────────────────────────────────────────
+# These are updated in place. Never duplicated.
+
+# One record per user address. Tracks their current state.
+type Staker @entity(immutable: false) {
+  id: Bytes!
+  stakedBalance: BigInt!
+  totalRewardsClaimed: BigInt!
+}
+
+type Protocol @entity(immutable: false) {
+  id: Bytes!
+  totalValueStaked: BigInt!
+  totalRewardsPaid: BigInt!
 }

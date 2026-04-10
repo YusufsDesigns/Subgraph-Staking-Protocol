@@ -1,0 +1,48 @@
+# dependencies
+/node_modules
+
+# Next.js build output
+/.next/
+/out/
+/build
+
+# environment variables — never commit these
+.env
+.env.local
+.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+# .env.example is safe to commit (no secrets)
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+*.pem
+.idea/
+.vscode/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# Yarn (not used, but ignore if accidentally created)
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+/CLAUDE.md
