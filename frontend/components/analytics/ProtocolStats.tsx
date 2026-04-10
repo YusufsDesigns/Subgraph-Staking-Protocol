@@ -116,8 +116,8 @@ export function ProtocolStats({ protocol, stakerCount, totalVolume }: Props) {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-      {DEFS.map((def, i) => (
-        <StatCard key={def.key} {...def} {...values[def.key]} index={i} />
+      {DEFS.map(({ key, ...rest }, i) => (
+        <StatCard key={key} {...rest} {...values[key]} index={i} />
       ))}
     </div>
   )
